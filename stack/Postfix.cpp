@@ -3,6 +3,9 @@
 #define MAX 10
 using namespace std;
 int top=-1;
+class Postfix
+{
+	public:
 void push(int st[],int val)
 {
 	if(top==MAX-1)
@@ -31,8 +34,10 @@ int val;
 	return val;
 	}
 }
+};
 int main()
 {
+	Postfix p;
     char x[30];
     int st[30];
     int a, b;
@@ -41,29 +46,29 @@ int main()
     for (int i = 0; i < strlen(x); i++)
     {
         if (x[i] >= 48 && x[i] <= 57)
-            push(st,x[i]-'0');
+            p.push(st,x[i]-'0');
         else if (x[i] >= 42 && x[i] <= 47)
         {
-            a=pop(st);
-            b=pop(st);
+            a=p.pop(st);
+            b=p.pop(st);
             switch(x[i])
             {
             case '+':
-                push(st,a+b);
+                p.push(st,a+b);
                 break;
             case '-':
-                push(st,b-a);
+                p.push(st,b-a);
                 break;
             case '*':
-                push(st,b*a);
+                p.push(st,b*a);
                 break;
             case '/':      
-                push(st,b/a);
+                p.push(st,b/a);
                 break;
             }
         }
     }
-    cout<<"ans is "<<pop(st)<<endl;
+    cout<<"ans is "<<p.pop(st)<<endl;
 
 
 }
